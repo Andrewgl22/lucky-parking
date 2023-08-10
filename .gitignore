@@ -8,3 +8,4 @@ data/
 db-backups/
 src/
 src.egg-info/
+node_modules

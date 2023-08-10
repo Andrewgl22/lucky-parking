@@ -1,0 +1,32 @@
+name: Deploy to AWS Elastic Beanstalk
+
+on:
+  push:
+    branches:
+      - EB_test
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up CDK
+      run: |
+        npm install -g aws-cdk
+
+    - name: Install CDK app dependencies
+      run: |
+        cd path-to-cdk-directory
+        npm install
+
+    - name: Deploy using CDK
+      env:
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      run: |
+        cd path-to-cdk-directory
+        cdk deploy
+

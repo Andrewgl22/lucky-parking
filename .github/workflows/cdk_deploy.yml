@@ -1,7 +1,9 @@
 name: CDK Deploy
 
 on:
-  workflow_dispatch:
+  push:
+    branches:
+      - stable-test
 
 jobs:
   deploy:
@@ -10,8 +12,6 @@ jobs:
     steps:
     - name: Checkout stable-test branch
       uses: actions/checkout@v2
-      with:
-        ref: stable-test
 
     - name: Setup Node.js
       uses: actions/setup-node@v2

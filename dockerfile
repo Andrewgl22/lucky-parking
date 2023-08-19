@@ -13,6 +13,8 @@ COPY ./server/package*.json ./
 RUN npm install
 COPY ./server ./
 
+# changed naming
+
 # ---- Nginx Setup ----
 FROM nginx:alpine
 COPY --from=react-build /app/build /usr/share/nginx/html

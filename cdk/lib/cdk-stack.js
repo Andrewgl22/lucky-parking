@@ -11,7 +11,7 @@ class MyEbStack extends cdk.Stack {
 
         // Docker image that encapsulates both frontend and server
         const unifiedDockerAsset = new assets.DockerImageAsset(this, 'UnifiedDockerImage', {
-            directory: '../../', // this directory should contain a Dockerfile that sets up both frontend and server
+            directory: '../../lucky-parking', // this directory should contain a Dockerfile that sets up both frontend and server
         });
 
         // EB environment for the unified application

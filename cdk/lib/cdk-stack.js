@@ -6,6 +6,8 @@ class MyEbStack extends cdk.Stack {
     constructor(scope, id, props) {
         super(scope, id, props);
 
+        console.log('Resolved Path:', path.resolve('../../'));
+
         // Docker image that encapsulates both frontend and server
         const unifiedDockerAsset = new assets.DockerImageAsset(this, 'UnifiedDockerImage', {
             directory: '../../', // this directory should contain a Dockerfile that sets up both frontend and server

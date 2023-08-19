@@ -1,6 +1,6 @@
 const cdk = require('aws-cdk-lib');
 const eb = require('aws-cdk-lib/aws-elasticbeanstalk');
-const assets = require('@aws-cdk/aws-ecr-assets');
+const assets = require('aws-cdk-lib/aws-ecr-assets');
 
 class MyEbStack extends cdk.Stack {
     constructor(scope, id, props) {

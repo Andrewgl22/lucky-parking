@@ -6,6 +6,8 @@ RUN npm install
 COPY ./client ./
 RUN npm run build
 
+# comment for test
+
 # ---- Build Server App ----
 FROM node:alpine AS server-build
 WORKDIR /app

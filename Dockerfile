@@ -4,6 +4,7 @@ WORKDIR /app
 COPY ./client/package*.json ./  
 RUN npm install
 COPY ./client ./
+ENV NODE_OPTIONS="--openssl-legacy-provider"
 RUN npm run build
 
 # comment for test again one more again 22

@@ -11,12 +11,28 @@ class MyEbStack extends cdk.Stack {
 
         // Docker image that encapsulates both frontend and server
         const unifiedDockerAsset = new assets.DockerImageAsset(this, 'UnifiedDockerImage', {
-            directory: '../../lucky-parking', // this directory should contain a Dockerfile that sets up both frontend and server
+            directory: '../../lucky-parking',
         });
 
-        // EB environment for the unified application
+        // Create Elastic Beanstalk Application
+        const ebApp = new eb.CfnApplication(this, 'MyEBApplication', {
+            applicationName: 'LP-EB-app'
+        });
+
+        // Add Docker Image as an application version in Elastic Beanstalk
+        const ebAppVersion = new eb.CfnApplicationVersion(this, 'AppVersion', {
+            applicationName: ebApp.applicationName,
+            sourceBundle: {
+                s3Bucket: unifiedDockerAsset.imageUri.split(':')[0],
+                s3Key: unifiedDockerAsset.imageUri.split(':')[1]
+            },
+            versionLabel: '1.0.0',
+        });
+
+        // Create Elastic Beanstalk Environment
         const unifiedEbEnv = new eb.CfnEnvironment(this, 'UnifiedEnvironment', {
-            applicationName: 'LP-EB-app',
+            applicationName: ebApp.applicationName,
+            dependsOn: [ebApp],
             solutionStackName: '64bit Amazon Linux 2 v3.6.0 running Docker',
             versionLabel: '1.0.0',
         });

@@ -17,7 +17,7 @@ class MyEbStack extends cdk.Stack {
         // EB environment for the unified application
         const unifiedEbEnv = new eb.CfnEnvironment(this, 'UnifiedEnvironment', {
             applicationName: 'LP-EB-app',
-            solutionStackName: '64bit Amazon Linux 2 v3.4.4 running Docker',
+            solutionStackName: '64bit Amazon Linux 2 v3.6.0 running Docker',
             versionLabel: '1.0.0',
         });
     }

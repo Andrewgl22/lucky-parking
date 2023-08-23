@@ -20,15 +20,18 @@ COPY ./server ./
 
 # ---- Nginx Setup ----
 FROM nginx:alpine
+# Copy React build and Nginx default.conf
 COPY --from=react-build /app/build /usr/share/nginx/html
-
-# Copy Nginx default.conf with configurations for reverse proxy (assuming you have one)
 COPY ./nginx/default.conf /etc/nginx/conf.d/
 
-# Copy server node modules and other files
+# Copy server files
 WORKDIR /app
 COPY --from=server-build /app .
 
+# Add a startup script
+COPY ./start.sh /start.sh
+RUN chmod +x /start.sh
+
 EXPOSE 80
 
-CMD ["nginx", "-g", "daemon off;"]
+CMD ["/start.sh"]

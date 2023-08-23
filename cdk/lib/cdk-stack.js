@@ -28,7 +28,9 @@ class MyEbStack extends cdk.Stack {
           },
         ],
       });
+      ebEnv.node.addDependency(ebApp);
   }
+  
 }
 
 module.exports = { MyEbStack };
